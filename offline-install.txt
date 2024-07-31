@@ -1,0 +1,30 @@
+# https://hruks.ru/2020/05/15/python3-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-pip-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2-offline/
+
+На машине с интернетом
+
+python3 -m venv vevn
+source venv/bin/active
+pip install pip --upgrade
+
+# директория для скачивания пакетов
+mkdir pkg
+cd pkg
+
+# отдельно скачиваю последнею версию pip
+pip download pip
+
+# скачиваю необходимые пакеты с зависимостями
+pip download -r ../requirements.txt
+
+
+
+На машине без интернета
+
+python3 -m venv OFFLINE
+source venv/bin/active
+
+# устанавливаю ранее скаченный pip (версия может быть другая)
+pip install pkg/pip-24.2-py3-none-any.whl
+
+# установка пакетов из списка requirements.txt, пакеты должны лежать в pkg (директория)
+pip install --no-index --find-links pkg -r requirements.txt
